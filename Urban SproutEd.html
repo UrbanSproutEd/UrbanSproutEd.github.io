@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Urban SproutEd — Pitch Deck</title>
+
+<!-- IMAGE CONFIGURATION -->
+<script>
+// Image Configuration: Local directory paths and fallback URLs
+window.imageConfig = {
+  // Main logo/branding
+  logo: {
+    local: 'images/Urban SproutEd.png',
+    url: 'https://example.com/urban-sprouted-logo.png'
+  },
+  icon: {
+    local: 'images/Urban SproutEd Icon.png',
+    url: 'https://example.com/urban-sprouted-icon.png'
+  },
+  
+  // Problem/Solution images
+  problemShowcase: {
+    local: 'images/Problem Showcase.jpg',
+    url: 'https://example.com/problem-showcase.jpg'
+  },
+  
+  // System diagrams
+  dwcDiagram: {
+    local: 'images/dwc diagram.jpg',
+    url: 'https://example.com/dwc-diagram.jpg'
+  },
+  dwcPrototype: {
+    local: 'images/dwc prototype.jpg',
+    url: 'https://example.com/dwc-prototype.jpg'
+  },
+  rdwcDiagram: {
+    local: 'images/rdwc diagram.jpg',
+    url: 'https://example.com/rdwc-diagram.jpg'
+  },
+  rdwcSystem: {
+    local: 'images/rdwc system.jpg',
+    url: 'https://example.com/rdwc-system.jpg'
+  }
+};
+
+// Helper function to get image path (tries local first, falls back to URL)
+window.getImagePath = function(imageKey) {
+  const config = window.imageConfig[imageKey];
+  if (!config) return '';
+  
+  // Return local path if available, otherwise use URL
+  // You can add more sophisticated checking here if needed
+  return config.local || config.url;
+};
+</script>
+
+<style>
+:root{--bg:#F6F5EF;--card:rgba(36,74,54,.06);--text:#252B27;--muted:rgba(37,43,39,.74);--title:#244A36;--sage:#8BAF83;--forest:#244A36;--forest-line:transparent;--gold:#D9A441;--line:rgba(37,43,39,.12);--onforest:#F6F5EF;--navbg:#244A36;--navfg:#F6F5EF;--dot:rgba(37,43,39,.25);--doton:#244A36;--accent:#244A36;--shadow:0 2px 8px rgba(37,43,39,.08);--ink35:rgba(37,43,39,.35);--ink12:rgba(37,43,39,.12);--k:1}
+[data-theme="dark"]{--bg:#121A15;--card:rgba(246,245,239,.06);--text:#F6F5EF;--muted:rgba(246,245,239,.76);--title:#F6F5EF;--forest-line:rgba(246,245,239,.16);--line:rgba(246,245,239,.16);--navbg:#8BAF83;--navfg:#121A15;--dot:rgba(246,245,239,.3);--doton:#8BAF83;--accent:#8BAF83;--shadow:none;--ink35:rgba(246,245,239,.4);--ink12:rgba(246,245,239,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{overflow:hidden;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:28px;line-height:1.45}
+.canvas{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--k))}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.slide.on{opacity:1;visibility:visible}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+/* master */
+.logo{position:absolute;left:96px;top:40px;height:56px;display:flex;align-items:center;z-index:5}
+.logo img{height:56px;width:auto;display:block}
+.logo img{background:#244A36;padding:6px 12px;border-radius:12px;box-sizing:content-box}
+[data-theme="dark"] .logo img{background:transparent;padding:0}
+.logo .fb{display:none;font-weight:700;color:var(--title);font-size:28px}
+.logo.nofile img{display:none}.logo.nofile .fb{display:block}
+.logo.hide{display:none}
+#theme{position:absolute;left:1776px;top:40px;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--title);display:grid;place-items:center;cursor:pointer;z-index:5}
+#theme svg{width:26px;height:26px}
+#theme .moon{display:none}[data-theme="dark"] #theme .sun{display:none}[data-theme="dark"] #theme .moon{display:block}
+/* title block */
+.tb{position:absolute;left:96px;top:130px}
+.tb h1{font-size:80px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1;color:var(--title)}
+.tb h2{font-size:36px;font-weight:600;line-height:1.2;color:var(--muted);margin-top:6px}
+.head{font-size:48px;font-weight:700;line-height:1.15;color:var(--text)}
+.head em{font-style:normal;color:var(--title)}
+.label{font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title)}
+.body{font-size:28px;line-height:1.45}.sec{font-size:24px;line-height:1.45}
+.abs{position:absolute}
+/* components */
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow)}
+.badge{width:72px;height:72px;border-radius:50%;background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);font-size:36px;font-weight:800;display:grid;place-items:center;flex:none}
+.panel{background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);border-radius:24px}
+.icon{width:64px;height:64px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.img-slot{position:absolute;right:0;width:560px;height:640px;border-radius:320px 0 0 320px;background:var(--sage);opacity:.28;background-size:cover;background-position:center}
+.img-slot.has-img{opacity:1;background:var(--img) center/cover}
+/* nav */
+nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:10}
+.nb{width:44px;height:44px;border-radius:50%;border:0;background:var(--navbg);color:var(--navfg);display:grid;place-items:center;cursor:pointer}
+.nb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.nb:disabled{opacity:.35;cursor:default}
+.nb:focus-visible,#theme:focus-visible,.dot:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.dots{display:flex;align-items:center}
+.dot{width:24px;height:24px;border:0;background:none;display:grid;place-items:center;cursor:pointer}
+.dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--dot);transition:transform .15s}
+.dot.on::after{background:var(--doton);transform:scale(1.4)}
+/* S1 */
+#s1 .txt{position:absolute;left:96px;top:262px;width:1040px}
+#s1 .p{max-width:960px;margin-top:18px}
+#s1 .q{margin-top:26px;border-left:8px solid var(--sage);padding-left:24px;font-size:34px;font-weight:700;line-height:1.25;color:var(--title);max-width:960px}
+#s1 .stats{position:absolute;left:96px;top:760px;width:1284px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+#s1 .stat{height:224px;padding:24px 20px;display:flex;flex-direction:column;justify-content:flex-start}
+#s1 .num{font-size:72px;font-weight:800;line-height:1.05;color:var(--title);letter-spacing:-.02em;white-space:nowrap}
+#s1 .stat .sec{margin-top:10px;line-height:1.3}
+#s1 .img-slot{width:500px;top:322px}
+/* S2A */
+.logo-lg{position:absolute;left:96px;top:64px;height:190px;display:flex;align-items:center;z-index:5}
+.logo-lg img{height:190px;width:auto;display:block}
+.logo-lg img{background:#244A36;padding:12px 24px;border-radius:24px;box-sizing:content-box}
+[data-theme="dark"] .logo-lg img{background:transparent;padding:0}
+.logo-lg .fb{display:none;font-weight:800;font-size:52px;color:var(--title);line-height:1}
+.logo-lg.nofile img{display:none}.logo-lg.nofile .fb{display:block}
+#s2a .vp{position:absolute;left:640px;top:86px;width:1060px}
+#s2a .vp .head{margin-top:8px}
+#s2a .steps{position:absolute;left:96px;top:310px;width:1728px;display:grid;grid-template-rows:repeat(4,1fr);gap:24px;height:674px}
+.step{display:grid;grid-template-columns:72px 400px 1fr;align-items:center;column-gap:32px;padding:0 40px}
+.step h3{font-size:40px;font-weight:700;color:var(--title);line-height:1.2}
+.step p{font-size:28px;line-height:1.4}
+/* S2B */
+#s2b .head{position:absolute;left:96px;top:290px}
+#s2b .sdgs{position:absolute;left:96px;top:376px;width:1728px;height:608px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.sdg{padding:0;overflow:hidden;display:flex;flex-direction:column;text-align:center}
+.sdg .hd{background:var(--forest);border-bottom:1.5px solid var(--forest-line);color:var(--onforest);padding:20px 0 16px}
+.sdg .hd .label{color:var(--onforest)}
+.sdg .n{font-size:110px;font-weight:800;line-height:1}
+.sdg h3{font-size:32px;font-weight:700;color:var(--title);line-height:1.2;padding:24px 18px 0}
+.sdg p{font-size:26px;line-height:1.4;padding:14px 18px 0}
+/* S3 */
+#s3 .head{position:absolute;left:96px;top:290px}
+#s3 .cmp{position:absolute;left:96px;top:376px;width:1728px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.pn{border:1.5px solid var(--line);border-radius:24px;overflow:hidden;height:316px;background:var(--card)}
+.pn .ph{height:64px;display:flex;align-items:center;padding:0 32px;font-size:34px;font-weight:700}
+.pn.soil .ph{background:var(--ink12);color:var(--text)}
+.pn.hyd .ph{background:var(--forest);color:var(--onforest);border-bottom:1.5px solid var(--forest-line)}
+.mrow{display:flex;align-items:center;height:76px;padding:0 32px}
+.mrow .ml{width:210px;font-size:24px;font-weight:600;flex:none}
+.bar{height:40px;border-radius:8px;flex:none}
+.soil .bar{background:var(--ink35)}.hyd .bar{background:var(--forest);border:1.5px solid var(--forest-line)}
+[data-theme="dark"] .hyd .bar{background:var(--sage)}
+.mv{font-size:40px;font-weight:800;margin-left:14px;white-space:nowrap;color:var(--text)}
+.hyd .mv{color:var(--title)}
+#s3 .foot{position:absolute;left:96px;top:702px;font-size:22px;color:var(--muted)}
+#s3 .proc{position:absolute;left:96px;top:752px;width:1728px;height:232px;display:flex;align-items:stretch;gap:12px}
+.pb{flex:1;display:flex;align-items:center;gap:28px;padding:0 32px}
+.pb .c{width:88px;height:88px;border-radius:50%;background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);font-size:44px;font-weight:800;display:grid;place-items:center;flex:none}
+.pb h3{font-size:40px;font-weight:700;color:var(--title);line-height:1.2}
+.pb p{font-size:26px;line-height:1.35;margin-top:4px}
+.chev{width:40px;flex:none;align-self:center;fill:none;stroke:var(--accent);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;height:40px}
+:root{--c1:#244A36;--c2:#8BAF83;--c3:rgba(37,43,39,.55);--c4:rgba(139,175,131,.45)}
+[data-theme="dark"]{--c1:#8BAF83;--c2:rgba(246,245,239,.6);--c3:rgba(139,175,131,.5);--c4:rgba(246,245,239,.28)}
+/* S4A */
+#s4a .head{position:absolute;left:96px;top:290px}
+#s4a .sub{position:absolute;left:96px;top:352px}
+#s4a .pockets{position:absolute;left:96px;top:420px;width:900px;height:564px;display:grid;grid-template-rows:repeat(2,1fr);gap:24px}
+.pocket{display:grid;grid-template-columns:72px 1fr 210px;column-gap:24px;align-items:center;padding:16px 28px}
+.pocket h3{font-size:34px;font-weight:700;color:var(--title);line-height:1.2}
+.pocket p{font-size:24px;line-height:1.4;margin-top:4px}
+.pocket .fig{text-align:right}
+.fig b{display:block;font-size:36px;font-weight:800;color:var(--title);line-height:1.1;white-space:nowrap}
+.fig span{display:block;font-size:22px;color:var(--muted);line-height:1.3;margin-top:4px}
+.pocket.up{border-style:dashed;border-width:2px;border-color:var(--ink35);background:transparent;box-shadow:none}
+.pocket.up .fig .label{font-size:22px;line-height:1.3;display:block}
+#s4a .chart{position:absolute;left:1040px;top:350px;width:784px;height:634px}
+#s4a .chart svg{position:absolute;left:0;top:50px;width:784px;height:584px}
+.dl{position:absolute;width:200px;font-size:24px;line-height:1.3}
+.dl b{display:block;font-weight:700;color:var(--text)}
+.dl.l{text-align:right}
+.donut-c{position:absolute;left:0;width:784px;top:300px;text-align:center}
+.donut-c .v{font-size:72px;font-weight:800;color:var(--title);line-height:1;letter-spacing:-.02em}
+.donut-c .u{font-size:24px;color:var(--muted);margin-top:4px}
+/* S4B */
+#s4b .head{position:absolute;left:96px;top:290px}
+#s4b .pl{position:absolute;left:96px;top:350px;width:924px;font-size:26px;line-height:1.3}
+.tr{display:grid;grid-template-columns:290px 1fr 210px;column-gap:16px;align-items:center;min-height:70px;padding:0 20px;border-bottom:1.5px solid var(--line)}
+.tr .n{text-align:right;font-weight:700;white-space:nowrap}
+.tr.th{min-height:56px;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title)}
+.tr.sec{min-height:60px;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title);border-bottom:0;padding-top:8px}
+.tr.tot{font-weight:800;grid-template-columns:1fr 210px}
+.tr.net{background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);border-radius:16px;min-height:96px;margin-top:12px}
+.tr.net .n{color:var(--gold);font-size:44px;font-weight:800}
+.tr.net b{font-size:28px}
+#s4b .ch{position:absolute;left:1068px;top:350px;width:756px}
+.cb{display:grid;grid-template-columns:300px 1fr;align-items:center;column-gap:16px;height:86px}
+.cb .nm{font-size:24px;font-weight:700;line-height:1.2}
+.cb .nt{font-size:22px;font-weight:400;color:var(--muted);line-height:1.2}
+.cb .tk{display:flex;align-items:center}
+.cb .bar2{height:40px;border-radius:8px;background:var(--c1);flex:none}
+.cb .val{font-size:24px;font-weight:700;margin-left:12px;white-space:nowrap}
+#s4b .annual{position:absolute;left:1068px;top:764px;width:756px;height:220px;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;padding:0 24px;gap:20px}
+.annual .label{color:var(--onforest);font-size:22px}
+.annual .v{font-size:56px;font-weight:800;line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+.annual .v.g{color:var(--gold)}
+.annual .u{font-size:22px;color:var(--onforest);opacity:.9}
+/* S5 marketing */
+#s5 .head{position:absolute;left:96px;top:290px}
+#s5 .mk{position:absolute;left:96px;top:372px;width:1728px;height:612px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:24px}
+.mc{padding:28px 32px;display:flex;flex-direction:column}
+.mc .tr1{display:flex;align-items:center;gap:16px;height:96px}
+.mc .badge{width:56px;height:56px;font-size:28px}
+.mc h3{font-size:32px;font-weight:700;line-height:1.2;color:var(--title)}
+.mc p{font-size:24px;line-height:1.4;margin-top:12px}
+.mc.tile{justify-content:center;padding:32px}
+.tile p{font-size:30px;font-weight:600;line-height:1.35;margin:0}
+/* S6 competition */
+#s6 .head{position:absolute;left:96px;top:290px}
+#s6 .comp{position:absolute;left:96px;top:372px;width:1728px;height:262px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.cc h3{font-size:40px;font-weight:700;color:var(--title);line-height:1.2}
+.chip{display:inline-block;margin:10px 0 12px;padding:4px 16px;border:1.5px solid var(--accent);border-radius:999px;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title)}
+.cc p{font-size:24px;line-height:1.4}
+#s6 .adv{position:absolute;left:96px;top:658px;width:1728px;height:326px;padding:32px 40px;display:flex;flex-direction:column;justify-content:space-between}
+.adv .label{color:var(--onforest)}
+.adv .st{font-size:40px;font-weight:600;line-height:1.3}
+.pills{display:flex;gap:16px;flex-wrap:wrap}
+.pill{padding:8px 24px;border-radius:999px;border:1.5px solid rgba(246,245,239,.5);background:rgba(246,245,239,.12);font-size:24px;font-weight:600}
+/* S7 impact */
+#s7 .head{position:absolute;left:96px;top:290px}
+#s7 .mis{position:absolute;left:96px;top:352px;width:1500px;font-size:28px;line-height:1.35}
+#s7 .imp{position:absolute;left:96px;top:432px;width:1728px;height:364px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:12px 24px}
+.ic{padding:14px 24px}
+.ic .tr1{display:flex;align-items:center;gap:16px}
+.ic .icon{width:48px;height:48px;flex:none}
+.ic h3{font-size:32px;font-weight:700;color:var(--title);line-height:1.2}
+.ic p{font-size:24px;line-height:1.3;margin-top:4px}.ic p b{color:var(--title);font-weight:800}
+#s7 .band{position:absolute;left:96px;top:812px;width:1728px;height:172px;padding:14px 24px;display:flex;flex-direction:column;justify-content:space-between}
+.band .st{font-size:32px;font-weight:700;line-height:1.3}
+.strip{display:flex;gap:8px}
+.sb{display:flex;align-items:center;gap:8px;padding:3px 10px 3px 3px;border-radius:999px;background:rgba(246,245,239,.12);border:1.5px solid rgba(246,245,239,.4);font-size:22px;font-weight:600;white-space:nowrap}
+.sb b{width:32px;height:32px;border-radius:50%;background:var(--sage);color:#121A15;display:grid;place-items:center;font-size:22px;font-weight:800}
+/* S8 team */
+#s8 .head{position:absolute;left:96px;top:290px}
+#s8 .team{position:absolute;left:96px;top:360px;width:1728px;height:524px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.tm{padding:24px 28px}
+.tm .av{width:120px;height:120px;border-radius:50%;background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);font-size:56px;font-weight:800;display:grid;place-items:center}
+.tm h3{font-size:36px;font-weight:700;margin-top:14px;line-height:1.2}
+.tm .role{font-size:24px;font-weight:700;color:var(--title);min-height:105px;margin-top:4px;line-height:1.4}
+.tm p{font-size:24px;line-height:1.4}
+#s8 .close{position:absolute;left:96px;top:900px;width:1728px;height:84px;display:flex;align-items:center;justify-content:center;gap:20px;font-size:44px;font-weight:700}
+.close svg{width:52px;height:52px;fill:none;stroke:var(--sage);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+/* mobile */
+@media (max-width:819px){
+ body{overflow:auto;font-size:18px}
+ .canvas{position:static;width:auto;height:auto;transform:none}
+ .slide{position:static;display:none;opacity:1;visibility:visible;padding:24px 24px 100px}
+ .slide.on{display:block}
+ .slide>*,.slide .txt,.slide .stats,.slide .steps,.slide .sdgs,.slide .cmp,.slide .proc,.slide .pockets,.slide .chart,.slide .ch,.slide .pl,.slide .annual,.slide .mk,.slide .comp,.slide .imp,.slide .ev,.slide .rdcol,.slide .team,.slide .adv,.slide .band,.slide .close,.slide .vp,.slide .donut-c,.slide .dl,.slide .chart svg,.slide .foot{position:static!important;left:auto!important;top:auto!important;width:auto!important;height:auto!important;margin:0 0 16px}
+ .logo,#theme{position:fixed!important;margin:0}.logo{left:16px!important;top:12px!important}#theme{left:auto!important;right:16px!important;top:12px!important}
+ .logo-lg{height:90px!important}.logo-lg img{height:90px}
+ .slide>.tb{padding-top:56px}
+ .tb h1{font-size:clamp(34px,10vw,48px)}.tb h2{font-size:20px}
+ .head{font-size:clamp(24px,6.4vw,30px)}
+ .stats,.steps,.sdgs,.cmp,.pockets,.mk,.comp,.imp,.ev,.team{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:none!important;gap:14px!important}
+ .proc{display:flex!important;flex-direction:column}.chev{display:none}
+ .step{grid-template-columns:56px 1fr;row-gap:6px}.step p{grid-column:1/-1;font-size:18px}.step h3{font-size:24px}
+ .pocket{grid-template-columns:56px 1fr}.pocket .fig{grid-column:1/-1;text-align:left}
+ .tr{grid-template-columns:1fr 90px!important;font-size:18px}.tr>span:nth-child(2):not(.n){grid-column:1/-1;order:3}
+ .tr.th span:nth-child(2){display:none}
+ .cb{grid-template-columns:1fr}.annual{display:grid!important;padding:16px!important}.annual .v{font-size:36px}
+ .img-slot{position:static!important;width:100%!important;height:200px!important;border-radius:24px!important;order:-1;margin:0 0 16px}
+ #s1 .stat{height:auto}#s1 .num{font-size:44px}.sec,.body,.pocket p,.mc p,.cc p,.ic p,.tm p,.step p{font-size:18px}
+ .q,.mis,.adv .st,.band .st,.tile p,.close{font-size:20px!important}
+ .sdg .n{font-size:64px}.sdg h3{font-size:22px}.sdg p{font-size:18px}
+ .mrow .ml{width:110px;font-size:18px}.bar{max-width:40%}.mv{font-size:24px}
+ .strip{flex-wrap:wrap}.close{flex-wrap:wrap;padding:16px}
+ .dl{display:block;text-align:left!important;font-size:18px}
+ .donut-c .v{font-size:44px}.chart svg{max-width:100%;height:auto!important}
+ .mc .tr1{height:auto}.tm .role{min-height:0}
+ .pocket h3,.mc h3,.cc h3,.ic h3,.tm h3,.pb h3{font-size:22px}.fig b{font-size:26px}.pb p{font-size:18px}.pb{padding:16px}.card{padding:18px}.pocket,.step{padding:16px}
+ .slide{overflow-x:hidden}.dots{max-width:60vw;flex-wrap:nowrap}nav{background:var(--bg);padding:8px 14px;border-radius:999px;bottom:12px;box-shadow:0 0 0 1.5px var(--line)}.dot{width:18px}
+ .pocket p,.sec{font-size:18px}.tr.net .n{font-size:28px}.pn .ph{font-size:24px}.sdg .hd .n{font-size:64px}
+}
+/* brand name never uppercased */
+.brand{text-transform:none;letter-spacing:0}
+/* S1 image slot */
+.img-slot,.img-slot.has-img{background:rgba(139,175,131,.28);opacity:1;overflow:hidden}
+.img-slot::before{content:"";position:absolute;inset:0;background:var(--img) center/cover no-repeat}
+.slide.on .img-slot{animation:fromR .9s cubic-bezier(.2,.8,.2,1) .15s both}
+.slide.on .img-slot::before{animation:slowzoom 14s ease-out both}
+@keyframes fromR{from{transform:translateX(100%)}}
+@keyframes slowzoom{from{transform:scale(1.12)}}
+/* S7 impact: roomier cards */
+#s7 .mis{width:1500px}
+#s7 .imp{top:440px;height:544px;gap:24px;grid-template-rows:repeat(2,minmax(0,1fr))}
+.ic{padding:28px 32px}
+.ic .icon{width:56px;height:56px}
+.ic .tr1{gap:18px}.ic p{margin-top:12px;line-height:1.4}
+/* S7b long-term + SDGs */
+#s7b .lt{position:absolute;left:96px;top:310px;width:1728px;height:674px;padding:64px 80px;display:flex;align-items:center}
+.lt-t{font-size:68px;font-weight:700;line-height:1.25}
+.lt .sg{color:var(--sage)}
+#s7b .sdgc{position:absolute;left:96px;top:690px;width:1728px;height:294px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.sc{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:24px 20px}
+.sc .c{width:88px;height:88px;border-radius:50%;background:var(--forest);border:1.5px solid var(--forest-line);color:var(--onforest);font-size:44px;font-weight:800;display:grid;place-items:center;flex:none}
+.sc h3{font-size:28px;font-weight:700;color:var(--title);line-height:1.2;margin-top:14px}
+/* animated background */
+#bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.canvas{z-index:1}
+.drop{position:absolute;bottom:-30px;width:14px;height:14px;border-radius:50% 50% 50% 0;background:var(--sage);opacity:.2;transform:rotate(-45deg);animation:drip linear infinite}
+@keyframes drip{to{transform:translateY(-115vh) rotate(-45deg)}}
+.blob{position:absolute;width:46vmax;height:46vmax;border-radius:50%;background:radial-gradient(circle,rgba(139,175,131,.20),transparent 65%);filter:blur(30px);animation:drift 26s ease-in-out infinite alternate}
+.blob.b1{left:-12vmax;top:-14vmax}.blob.b2{right:-14vmax;bottom:-16vmax;animation-duration:32s;animation-delay:-8s}
+[data-theme="light"] .blob{background:radial-gradient(circle,rgba(139,175,131,.28),transparent 65%)}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+/* entrance animations */
+.slide.on .rv{animation:rise2 .75s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 100ms)}
+@keyframes rise2{from{opacity:0;transform:translateY(32px)}}
+.slide.on .badge,.slide.on .pb .c,.slide.on .sc .c,.slide.on .tm .av{animation:pop .6s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--i,0)*70ms + 350ms)}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.slide.on .bar,.slide.on .bar2{animation:wgrow 1.1s cubic-bezier(.2,.8,.2,1) .8s both}
+@keyframes wgrow{from{width:0}}
+.slide.on .mv,.slide.on .cb .val{animation:fadein .5s ease 1.6s both}
+@keyframes fadein{from{opacity:0;transform:translateX(-10px)}}
+.seg{stroke-dasharray:0 var(--C)}
+.slide.on .seg{stroke-dasharray:var(--len) var(--C);transition:stroke-dasharray 1s cubic-bezier(.2,.8,.2,1) calc(.4s + var(--d))}
+.slide.on .tr.net{animation:rise2 .75s cubic-bezier(.2,.8,.2,1) .9s both,glow 2.4s ease-in-out 1.8s 2}
+@keyframes glow{50%{box-shadow:0 0 0 8px rgba(217,164,65,.22)}}
+.slide.on .chev{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){
+ #bg{display:none}
+ .slide.on .rv,.slide.on .badge,.slide.on .pb .c,.slide.on .sc .c,.slide.on .tm .av,.slide.on .bar,.slide.on .bar2,.slide.on .mv,.slide.on .cb .val,.slide.on .tr.net,.slide.on .chev,.slide.on .img-slot,.slide.on .img-slot::before{animation:none}
+ .seg{stroke-dasharray:var(--len) var(--C)}.slide.on .seg{transition:none}
+}
+@media (max-width:819px){.lt-t{font-size:24px}.lt{padding:24px!important}.sc{padding:16px}.sc h3{font-size:20px}.ic{padding:18px}}
+
+/* data update: sources, key numbers, evidence slide */
+.src{position:absolute;left:96px;top:984px;width:1300px;font-size:18px;line-height:1.3;color:var(--muted)}
+.cite{display:block;font-size:20px;font-weight:600;color:var(--muted);margin-top:8px;line-height:1.3}
+.cite-i{font-size:20px;color:var(--muted);white-space:nowrap}
+#s1 .stats{top:730px}
+#s1 .stat{height:230px}
+#s1 .stats{grid-template-columns:repeat(3,1fr)}
+#s1b .ev{position:absolute;left:96px;top:290px;width:1728px;height:670px;display:grid;grid-template-columns:780px 1fr;grid-template-rows:1fr 1fr;gap:24px}
+#s1b .pc{padding:28px 36px}
+#s1b .pc.big{grid-row:1/3;grid-column:2}
+#s1b .pc .tr1{display:flex;align-items:center;gap:20px}
+#s1b .pc .badge{width:56px;height:56px;font-size:28px}
+#s1b .pc h3{font-size:32px;font-weight:700;color:var(--title);line-height:1.2}
+#s1b .pc ul{list-style:none;margin-top:14px}
+#s1b .pc li{font-size:24px;line-height:1.35;padding:7px 0 7px 22px;position:relative}
+#s1b .pc li::before{content:"";position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:50%;background:var(--sage)}
+#s1b .pc li b{color:var(--title);font-weight:800}
+#s1b .pc li.note{font-style:italic;color:var(--muted)}
+@media (max-width:819px){.src{font-size:14px!important}#s1b .pc li{font-size:18px}#s1b .pc h3{font-size:22px}.cite{font-size:15px}}
+
+/* RDWC slide */
+.rdspec{position:absolute;left:96px;top:722px;width:744px;font-size:19px;line-height:1.3;color:var(--muted);display:flex;flex-wrap:wrap;column-gap:28px}
+.rdspec span{white-space:nowrap}
+.rdspec b{color:var(--title);font-weight:800}
+#s3b .rdimg{position:absolute;display:block;aspect-ratio:4/3;object-fit:cover;border-radius:24px;border:3px solid var(--forest);background:rgba(139,175,131,.28)}
+[data-theme="dark"] #s3b .rdimg{border-color:var(--line)}
+#s3b .rdimg.a{left:96px;top:280px;width:576px;height:432px}
+#s3b .rdimg.b{left:864px;top:290px;width:960px;height:720px;object-fit:contain;background:#16301F}
+#s3b .rdcard{position:absolute;padding:12px 26px}
+#s3b .rdcard.rd1{left:864px;top:104px;width:960px}
+#s3b .rdcard.rd1 ul{columns:2;column-gap:28px}
+#s3b .rdcard.rd1 li{break-inside:avoid}
+#s3b .rdcard.rd2{left:96px;top:784px;width:262px;height:230px}
+#s3b .rdcard.rd3{left:374px;top:784px;width:466px;height:230px}
+#s3b .rdcard h3{font-size:28px;font-weight:700;color:var(--title);line-height:1.2}
+#s3b .rdcard ul{list-style:none;margin-top:4px}
+#s3b .rdcard li{font-size:20px;line-height:1.25;padding:2px 0 2px 22px;position:relative}
+#s3b .rdcard li::before{content:"";position:absolute;left:0;top:12px;width:8px;height:8px;border-radius:50%;background:var(--sage)}
+#s3b .rdcard li b{color:var(--title);font-weight:800}
+#s3b .rd2 li,#s3b .rd3 li{font-size:19px;line-height:1.22}
+#s3b .rd2 h3,#s3b .rd3 h3{font-size:24px}
+#s3b .rd1 h3{font-size:26px}
+#s3b .rd1 li{line-height:1.2;padding:1px 0 1px 22px}
+#s3b .rd1 li::before,#s3b .rd2 li::before,#s3b .rd3 li::before{top:11px}
+@media (max-width:819px){
+ #s3b .rdimg{position:static!important;width:100%!important;height:auto!important;margin-bottom:14px}
+ #s3b .rdcard{position:static!important;width:auto!important;height:auto!important;margin-bottom:14px}
+ #s3b .rdcard.rd1 ul{columns:1}
+ #s3b .rdcard li,#s3b .rd2 li,#s3b .rd3 li{font-size:18px}#s3b .rdcard h3,#s3b .rd2 h3,#s3b .rd3 h3{font-size:22px}
+ .rdspec{position:static!important;width:auto!important;font-size:16px!important;margin-bottom:14px}
+}
+
+#s3c .tb h1{font-size:64px}
+#s3c .rdspec{left:96px;top:262px;width:1100px;font-size:24px;column-gap:36px;color:var(--text)}
+#s3c .rdspec span{padding:6px 18px;border:1.5px solid var(--line);border-radius:999px;background:var(--card)}
+#s3c .rdimg{position:absolute;display:block;object-fit:cover;border-radius:24px;border:3px solid var(--forest);background:rgba(139,175,131,.28)}
+[data-theme="dark"] #s3c .rdimg{border-color:var(--line)}
+#s3c .rdimg.a{left:1248px;top:110px;width:576px;height:432px}
+#s3c .rdimg.b{left:96px;top:564px;width:600px;height:450px;object-fit:contain;background:#16301F}
+#s3c .rdcard{position:absolute;padding:14px 28px}
+#s3c .rdcard h3{font-size:28px;font-weight:700;color:var(--title);line-height:1.2}
+#s3c .rdcard ul,#s3c .rdcard ol{margin-top:8px}
+#s3c .rdcard ul{list-style:none}
+#s3c .rdcard li{font-size:22px;line-height:1.3;padding:5px 0 5px 24px;position:relative}
+#s3c .rdcard ul li::before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;border-radius:50%;background:var(--sage)}
+#s3c .rdcard ol{list-style:none;counter-reset:s}
+#s3c .rdcard ol li{counter-increment:s;padding-left:38px}
+#s3c .rdcard ol li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--forest);color:var(--onforest);font-size:16px;font-weight:800;display:grid;place-items:center}
+#s3c .rdcard li b{color:var(--title);font-weight:800}
+#s3c .dc1{left:96px;top:336px;width:1120px;height:206px}
+#s3c .dc1 ol{columns:2;column-gap:32px}
+#s3c .dc1 li{break-inside:avoid;font-size:21px;line-height:1.25}
+#s3c .dc2{left:728px;top:564px;width:500px;height:450px}
+#s3c .dc3{left:1252px;top:564px;width:572px;height:450px}
+#s3c .dc2 li,#s3c .dc3 li{font-size:24px;padding-top:9px;padding-bottom:9px}
+#s3c .dc2 ul li::before,#s3c .dc3 ul li::before{top:21px}
+@media (max-width:819px){
+ #s3c .rdimg{position:static!important;width:100%!important;height:auto!important;aspect-ratio:4/3;margin-bottom:14px}
+ #s3c .rdcard{position:static!important;width:auto!important;height:auto!important;margin-bottom:14px}
+ #s3c .dc1 ol{columns:1}
+ #s3c .rdcard li,#s3c .dc1 li,#s3c .dc2 li,#s3c .dc3 li{font-size:18px}
+ #s3c .rdcard h3{font-size:22px}
+ #s3c .rdspec{position:static!important;width:auto!important;font-size:16px!important;margin-bottom:14px}
+}
+
+/* S4A2 cost tables */
+#s3d .col{position:absolute;top:276px;width:840px}
+#s3d .colL{left:96px}#s3d .colR{left:984px}
+#s3d .tbl{padding:0;overflow:hidden;margin-bottom:20px}
+#s3d .tt-h{background:var(--forest);border-bottom:1.5px solid var(--forest-line);color:var(--onforest);font-size:26px;font-weight:700;padding:0 24px;height:52px;display:flex;align-items:center}
+#s3d .rw{display:grid;grid-template-columns:1fr 170px 170px;column-gap:12px;align-items:center;min-height:40px;padding:0 24px;border-bottom:1.5px solid var(--line);font-size:22px;line-height:1.25}
+#s3d .colR .rw{grid-template-columns:1fr 190px 190px;min-height:64px}
+#s3d .rw .n{text-align:right;font-weight:700;white-space:nowrap}
+#s3d .rw.th{min-height:36px!important;font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title)}
+#s3d .rw.sec{min-height:34px!important;font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--title);background:var(--ink12)}
+#s3d .rw.tot{font-weight:800;background:rgba(139,175,131,.22)}
+#s3d .rw.tot .n{color:var(--title)}
+#s3d .rw:last-child{border-bottom:0}
+#s3d .rw.net{background:var(--forest);color:var(--onforest);min-height:80px!important;font-size:28px;font-weight:800}
+#s3d .rw.net .n{color:var(--gold);font-size:34px}
+@media (max-width:819px){
+ #s3d .rw,#s3d .colR .rw{grid-template-columns:1fr 84px 84px;font-size:15px;padding:0 12px;column-gap:6px}
+ #s3d .tt-h{font-size:18px}#s3d .rw.net{font-size:18px}#s3d .rw.net .n{font-size:20px}
+}
+
+/* ===== refinements ===== */
+@media (min-width:820px){.canvas{top:calc((100% - 72px)/2)}}
+.src{top:976px}
+.logo{transition:opacity .25s,visibility .25s}.logo.hide{display:flex;opacity:0;visibility:hidden}
+.slide:not(.on) .logo-lg{opacity:0;transition:opacity .25s}
+@keyframes blurIn{from{opacity:0;filter:blur(28px)}to{opacity:1;filter:blur(0)}}
+@keyframes imgInL{from{opacity:0;filter:blur(20px);transform:translateX(-90px)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes imgInR{from{opacity:0;filter:blur(20px);transform:translateX(90px)}to{opacity:1;filter:blur(0);transform:none}}
+#s3b.on .rdimg.a,#s3c.on .rdimg.b{animation:imgInL .6s cubic-bezier(.2,.8,.2,1) .1s both}
+#s1.on .img-slot{animation:imgInR .6s cubic-bezier(.2,.8,.2,1) .1s both}
+#s3b.on .rdimg.b,#s3c.on .rdimg.a{animation:imgInR .6s cubic-bezier(.2,.8,.2,1) .2s both}
+.slide:not(.on) .rdimg{opacity:0;transition:opacity .25s}
+@keyframes segDraw{from{stroke-dasharray:0 var(--C)}to{stroke-dasharray:var(--len) var(--C)}}
+@keyframes ringIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+.slide.on .seg{transition:none;animation:segDraw 1.1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.5s + var(--d))}
+.slide.on #chart1 svg circle:first-child{transform-box:fill-box;transform-origin:center;animation:ringIn .8s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion:reduce){#s1.on .img-slot,.slide.on .rdimg,.slide.on .seg,.slide.on #chart1 svg circle:first-child{animation:none!important}}
+/* S11 marketing: 3x2 + banner */
+#s5 .mk{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr 124px}
+#s5 .mc .tr1{height:72px}
+#s5 .mc{padding:24px 32px}
+#s5 .mc.tile{grid-column:1/-1;padding:0 48px;align-items:center;text-align:center}
+/* S12 USP text */
+#s6 .adv .st{font-size:36px;line-height:1.3}
+/* S9 dark UI tables */
+#s3d .tbl{background:#13201A;border:1px solid rgba(246,245,239,.12);color:#F6F5EF;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#s3d .tt-h{background:#1C3327;border-bottom:1px solid rgba(246,245,239,.12);font-size:26px;height:56px;padding:0 28px}
+#s3d .rw{border-bottom:1px solid rgba(246,245,239,.07);padding:0 28px;min-height:46px;color:#F6F5EF}
+#s3d .colR .rw{min-height:66px}
+#s3d .rw:nth-child(even){background:rgba(246,245,239,.045)}
+#s3d .rw.th{background:rgba(139,175,131,.12);color:#F6F5EF;border-bottom:1px solid rgba(139,175,131,.35)}
+#s3d .rw.sec{background:transparent;color:#A9C8A1}
+#s3d .rw.tot{background:rgba(139,175,131,.2);color:#F6F5EF}
+#s3d .rw.tot .n{color:#C9E4C1}
+#s3d .rw.net{background:#244A36;color:#F6F5EF}
+#s3d .rw.net .n{color:var(--gold)}
+</style></head><body>
+<div class="canvas" id="canvas">
+<div class="logo" id="logo"><img src="images/Urban%20SproutEd.png" alt="Urban SproutEd" onerror="this.parentNode.classList.add('nofile')"><span class="fb">Urban SproutEd</span></div>
+<button id="theme" aria-label="Switch light/dark theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+
+<!-- ===== SLIDE 1: PROBLEM ===== -->
+<section class="slide on" id="s1" data-n="1">
+<div class="tb"><h1>Problem</h1></div>
+<div class="txt">
+<div class="head">Pakistan’s Food System Is <em>Running Dry</em></div>
+<p class="body p">Pakistan depends on agriculture, yet water is becoming scarcer and food production faces growing pressure.</p>
+<p class="body p">Meanwhile, unused spaces in our schools remain unproductive, and students rarely get hands-on experience with how food is grown.</p>
+<div class="q">What if our schools could help grow the food of the future?</div>
+</div>
+<div class="stats">
+<div class="card stat"><div class="num">37.4%</div><div class="sec">of jobs in Pakistan are in agriculture<span class="cite">FAO</span></div></div>
+<div class="card stat"><div class="num">20–40%</div><div class="sec">of fruits and vegetables lost after harvest<span class="cite">Pakistan Economic Survey 2025-26</span></div></div>
+<div class="card stat"><div class="num">57%</div><div class="sec">of Sindh’s cropland affected by the 2022 floods<span class="cite">Scientific Reports, 2023</span></div></div>
+</div>
+<!-- Image: images/Problem Showcase.jpg (3:4). If the file is missing, the quiet sage shape shows instead. -->
+<div class="img-slot" style="--img:url('images/Problem%20Showcase.jpg')" aria-hidden="true"></div>
+<div class="src">Sources: FAO · Pakistan Economic Survey 2025-26 · Scientific Reports (2023)</div>
+</section>
+
+<!-- ===== SLIDE 1B: PROBLEM EVIDENCE ===== -->
+<section class="slide" id="s1b" data-n="2">
+<div class="tb"><h1>Problem</h1><h2>&amp; The Evidence</h2></div>
+<div class="ev">
+<div class="card pc"><div class="tr1"><div class="badge">1</div><h3>Children don’t know the sector that feeds them</h3></div>
+<ul>
+<li>Agriculture is around <b>23% of GDP</b> and <b>37.4% of jobs</b> <span class="cite-i">(FAO)</span></li>
+<li>Pakistan ranks <b>106th of 123</b> on the Global Hunger Index, and <b>4 in 10</b> children under five are stunted <span class="cite-i">(UNICEF)</span></li>
+</ul></div>
+<div class="card pc big"><div class="tr1"><div class="badge">3</div><h3>Agriculture is at high risk, and Sindh is on the front line</h3></div>
+<ul>
+<li>2022 floods: <b>57%</b> of Sindh’s cropland affected; estimated losses of <b>88%</b> cotton, <b>80%</b> rice, <b>61%</b> sugarcane <span class="cite-i">(Scientific Reports, 2023)</span></li>
+<li>Pakistan was ranked the <b>most climate-affected country</b> in 2022 <span class="cite-i">(Germanwatch)</span></li>
+<li>Water per person fell from <b>5,600+ m³</b> to below <b>900 m³</b>; agriculture uses <b>90%+</b> of freshwater; irrigation efficiency is below <b>45%</b> <span class="cite-i">(FreshPlaza)</span></li>
+<li><b>22%</b> water shortage approved for Punjab and Sindh for Rabi 2026-27 <span class="cite-i">(IRSA, Oct 2026)</span></li>
+<li>Why urban farming: Sindh is <b>~54%</b> urban (Pakistan ~39%), and urban population grows <b>3.65%/yr</b> vs <b>1.90%</b> in rural areas <span class="cite-i">(PBS Census 2023)</span></li>
+</ul></div>
+<div class="card pc"><div class="tr1"><div class="badge">2</div><h3>Food is lost before it reaches the city</h3></div>
+<ul>
+<li><b>20–40%</b> of fruits and vegetables are lost after harvest <span class="cite-i">(Economic Survey 2025-26)</span></li>
+<li>Causes: limited cold storage, power outages, and poor transport <span class="cite-i">(FreshPlaza, Dawn)</span></li>
+<li class="note">Hydroponics grows food near the consumer, so shorter routes mean less spoilage</li>
+</ul></div>
+</div>
+<div class="src">Sources: FAO · UNICEF · Pakistan Economic Survey 2025-26 · Scientific Reports (2023) · Germanwatch CRI · IRSA · PBS Census 2023 · FreshPlaza · Dawn</div>
+</section>
+
+
+<!-- ===== SLIDE 2A: TITLE & VALUE PROPOSITION (steps) ===== -->
+<section class="slide" id="s2a" data-n="3" data-nologo="1">
+<div class="logo-lg"><img src="images/Urban%20SproutEd.png" alt="Urban SproutEd" onerror="this.parentNode.classList.add('nofile')"><span class="fb">Urban SproutEd</span></div>
+<div class="vp"><div class="label">Value Proposition</div><div class="head">We transform underutilized school spaces into productive mini-farms.</div></div>
+<div class="steps">
+<div class="card step"><div class="badge">1</div><h3>Assess</h3><p>Identify suitable rooftops, courtyards, and unused corners.</p></div>
+<div class="card step"><div class="badge">2</div><h3>Install</h3><p>Set up hydroponic systems where conditions allow.</p></div>
+<div class="card step"><div class="badge">3</div><h3>Grow &amp; Sell</h3><p>Produce fresh vegetables for local buyers.</p></div>
+<div class="card step"><div class="badge">4</div><h3>Educate</h3><p>Give students hands-on experience in sustainable farming.</p></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 2B: VALUE PROPOSITION & SDGs ===== -->
+<section class="slide" id="s2b" data-n="4">
+<div class="tb"><h1>Global Goals</h1></div>
+<div class="head">Aligned with five UN Sustainable Development Goals</div>
+<div class="sdgs">
+<div class="card sdg"><div class="hd"><div class="label">SDG</div><div class="n">2</div></div><h3>Zero Hunger</h3><p>Fresh vegetables grown locally, close to the people who eat them.</p></div>
+<div class="card sdg"><div class="hd"><div class="label">SDG</div><div class="n">4</div></div><h3>Quality Education</h3><p>Students learn sustainable farming through hands-on practice.</p></div>
+<div class="card sdg"><div class="hd"><div class="label">SDG</div><div class="n">6</div></div><h3>Clean Water and Sanitation</h3><p>Hydroponic systems can use less water than conventional growing.</p></div>
+<div class="card sdg"><div class="hd"><div class="label">SDG</div><div class="n">12</div></div><h3>Responsible Consumption and Production</h3><p>Unused school space becomes productive, and food is grown near where it is eaten.</p></div>
+<div class="card sdg"><div class="hd"><div class="label">SDG</div><div class="n">13</div></div><h3>Climate Action</h3><p>Students build practical knowledge of resource conservation and sustainable farming.</p></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 3: SOLUTION & SUSTAINABILITY ===== -->
+<section class="slide" id="s3" data-n="5">
+<div class="tb"><h1>Solution</h1><h2>&amp; Sustainability</h2></div>
+<div class="head">Soil-free farming that <em>saves water and land</em></div>
+<div class="cmp">
+<div class="pn soil"><div class="ph">Soil farming</div>
+<div class="mrow"><span class="ml">Water used</span><span class="bar" style="width:330px"></span><span class="mv">100%</span></div>
+<div class="mrow"><span class="ml">Land needed</span><span class="bar" style="width:330px"></span><span class="mv">100%</span></div>
+<div class="mrow"><span class="ml">Yield per space</span><span class="bar" style="width:33px"></span><span class="mv">1×</span></div></div>
+<div class="pn hyd"><div class="ph">Hydroponics</div>
+<div class="mrow"><span class="ml">Water used</span><span class="bar" style="width:33px"></span><span class="mv">10%</span></div>
+<div class="mrow"><span class="ml">Land needed</span><span class="bar" style="width:33px"></span><span class="mv">10%</span></div>
+<div class="mrow"><span class="ml">Yield per space</span><span class="bar" style="width:330px"></span><span class="mv">up to 10×</span></div></div>
+</div>
+<div class="foot">Relative to soil farming, using upper-range figures reported in Pakistani press; actual results depend on crop and setup.</div>
+<div class="proc">
+<div class="card pb"><div class="c">1</div><div><h3>Build</h3><p>Stacked racks in a shed or rooftop</p></div></div>
+<svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+<div class="card pb"><div class="c">2</div><div><h3>Feed</h3><p>Nutrient water + coco peat, solar pumps</p></div></div>
+<svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+<div class="card pb"><div class="c">3</div><div><h3>Harvest</h3><p>Sold fresh and local, year-round</p></div></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 3B: RDWC SYSTEM ===== -->
+<section class="slide" id="s3b" data-n="6">
+<div class="tb"><h1>RDWC</h1><h2>Recirculating Deep Water Culture</h2></div>
+<img class="rdimg a" src="images/rdwc%20system.jpg" alt="RDWC grow tent with four parallel white PVC growing rows and a reservoir and pump on the left" onerror="this.style.display='none'">
+<img class="rdimg b" src="images/rdwc%20diagram.jpg" alt="RDWC technical layout: top view, side view dimensions and pipe cross-section" onerror="this.style.display='none'">
+<div class="rdspec"><span>Space Required: <b>10 ft × 8 ft (80 sq ft)</b></span><span>Total Capacity: <b>20 Plants (4 Rows × 5 Plants)</b></span><span>Pipe Length: <b>6 ft</b></span></div>
+<div class="card rdcard rd1"><h3>Main Components</h3><ul>
+<li><b>4 ×</b> 6 ft PVC growing pipes (3″ or 4″)</li>
+<li><b>20 ×</b> Net pots (2.5″ – 3″)</li>
+<li><b>1 ×</b> 50–70 L food-grade reservoir</li>
+<li>Submersible water pump (800–1,200 L/h)</li>
+<li>Air pump with 2–4 air stones</li>
+<li>PVC fittings (elbows, tees, end caps)</li>
+<li>Optional: Water chiller &amp; automated timer</li>
+</ul></div>
+<div class="card rdcard rd2"><h3>Operating Conditions</h3><ul>
+<li>Water Temperature: <b>18–22°C</b> (65–72°F)</li>
+<li>pH Level: <b>5.5 – 6.5</b></li>
+<li>EC Range: <b>1.2 – 2.0 mS/cm</b></li>
+</ul></div>
+<div class="card rdcard rd3"><h3>Best Practices &amp; Maintenance</h3><ul>
+<li>Use a light-tight reflective tent with active airflow</li>
+<li>Keep nutrient water strictly below 22°C to prevent root rot</li>
+<li>Automate pump and lighting schedules</li>
+<li>Flush and clean the system regularly</li>
+</ul></div>
+</section>
+
+
+<section class="slide" id="s3c" data-n="7">
+<div class="tb"><h1>DWC System – Prototype</h1><h2>Hydroponics Deep Water Culture</h2></div>
+<div class="rdspec"><span>Footprint: <b>40 × 30 × 25 cm</b></span><span>Capacity: <b>30–40 L</b></span><span>Yield: <b>4–6 Plants</b></span></div>
+<img class="rdimg a" src="images/dwc%20prototype.jpg" alt="DIY DWC prototype on a workshop bench: three leafy green plants growing from the lid of a dark reservoir, with an air pump and bubbling air stone" onerror="this.style.display='none'">
+<img class="rdimg b" src="images/dwc%20diagram.jpg" alt="DWC schematic: top view 40 × 30 cm, side view 40 × 25 × 30 cm, net pot close-up and components used" onerror="this.style.display='none'">
+<div class="card rdcard dc1"><h3>How It Works</h3><ol>
+<li>Plant roots grow directly in the nutrient solution (no soil is used).</li>
+<li>An air pump continuously provides oxygen directly to the roots via an air stone.</li>
+<li>Nutrient solution is kept still (with oxygen) or continuously circulated.</li>
+<li>Plants absorb water and nutrients directly, growing faster.</li>
+</ol></div>
+<div class="card rdcard dc2"><h3>Ideal Conditions (DWC)</h3><ul>
+<li>pH Level: <b>5.5 – 6.5</b></li>
+<li>EC Range: <b>1.2 – 2.0 mS/cm</b></li>
+<li>Water Temperature: <b>18 – 22°C</b> (65–72°F)</li>
+<li>Light Duration: <b>12 – 16 hrs/day</b></li>
+</ul></div>
+<div class="card rdcard dc3"><h3>System Components Checklist</h3><ul>
+<li><b>1 ×</b> Plastic container with lid (30–40L)</li>
+<li><b>4–6 ×</b> Net pots (size-appropriate)</li>
+<li><b>1 ×</b> Air pump &amp; Tubing</li>
+<li><b>1 ×</b> Air stone / Diffuser</li>
+<li>Growing medium (LECA / coco pebbles)</li>
+<li>Hydroponic nutrient solution</li>
+</ul></div>
+</section>
+
+<!-- ===== SLIDE 4A: PLAN & FINANCIAL PLAN · REVENUE ===== -->
+<section class="slide" id="s4a" data-n="7">
+<div class="tb"><h1>Financial Plan</h1><h2>&amp; Revenue</h2></div>
+<div class="head">So, where do we make money from?</div>
+<div class="body sub">There are two major pockets of money for us.</div>
+<div class="pockets">
+<div class="card pocket"><div class="badge">1</div><div><h3>Vegetable sales</h3><p>Fresh produce sold to parents, the school cafeteria, and local shops and cafes.</p></div><div class="fig"><b id="f-veg">PKR 15,000</b><span>/ month</span></div></div>
+<div class="card pocket"><div class="badge">2</div><div><h3>School subscription</h3><p>Annual renewal and maintenance of the farming system.</p></div><div class="fig"><b id="f-sub">PKR 12,500</b><span>/ month · PKR 150,000 per year</span></div></div>
+</div>
+<div class="chart" id="chart1"><div class="label">Monthly revenue — PKR <span id="c1t"></span></div></div>
+</section>
+
+<!-- ===== SLIDE 4A2: COST COMPARISON & FINANCIAL BREAKDOWN (tables) ===== -->
+<section class="slide" id="s3d" data-n="8">
+<div class="tb"><h1>Cost Comparison</h1><h2>DWC vs RDWC &amp; Financial Breakdown</h2></div>
+<div class="col colL">
+<div class="card ct tbl"><div class="tt-h">1. Setup Cost (CapEx)</div>
+<div class="rw th"><span>Component</span><span class="n">DWC</span><span class="n">RDWC</span></div>
+<div class="rw tot"><span>Total Setup Cost</span><span class="n">PKR 20,000</span><span class="n">PKR 25,000</span></div>
+<div class="rw r"><span>Reservoirs &amp; Lids</span><span class="n">PKR 7,000</span><span class="n">PKR 10,000</span></div>
+<div class="rw r"><span>Aeration &amp; Plumbing</span><span class="n">PKR 3,000</span><span class="n">PKR 6,000</span></div>
+<div class="rw r"><span>Net Pots &amp; Media</span><span class="n">PKR 3,000</span><span class="n">PKR 3,000</span></div>
+<div class="rw r"><span>Nutrients &amp; Seeds</span><span class="n">PKR 3,000</span><span class="n">PKR 3,000</span></div>
+<div class="rw r"><span>Testing Equipment</span><span class="n">PKR 2,500</span><span class="n">PKR 2,500</span></div>
+<div class="rw r"><span>Miscellaneous</span><span class="n">PKR 1,500</span><span class="n">PKR 500</span></div>
+</div>
+<div class="card ct tbl"><div class="tt-h">2. Monthly Operating Cost (OpEx)</div>
+<div class="rw th"><span>Component</span><span class="n">DWC</span><span class="n">RDWC</span></div>
+<div class="rw tot"><span>Total Monthly Cost</span><span class="n">PKR 1,400</span><span class="n">PKR 1,900</span></div>
+<div class="rw r"><span>Electricity</span><span class="n">PKR 400</span><span class="n">PKR 700</span></div>
+<div class="rw r"><span>Nutrients &amp; Water</span><span class="n">PKR 600</span><span class="n">PKR 800</span></div>
+<div class="rw r"><span>Seeds / Replanting</span><span class="n">PKR 400</span><span class="n">PKR 400</span></div>
+</div>
+</div>
+<div class="col colR">
+<div class="card ct tbl"><div class="tt-h">Financial Breakdown</div>
+<div class="rw th"><span>Category</span><span class="n">Monthly</span><span class="n">Annual (×12)</span></div>
+<div class="rw sec"><span>Revenue</span><span></span><span></span></div>
+<div class="rw r"><span>Vegetable Sales (70 kg × PKR 180/kg)</span><span class="n">PKR 12,600</span><span class="n">PKR 151,200</span></div>
+<div class="rw r"><span>School Subscription (Maintenance &amp; STEM Lab)</span><span class="n">PKR 20,000</span><span class="n">PKR 240,000</span></div>
+<div class="rw tot"><span>Total Revenue</span><span class="n">PKR 32,600</span><span class="n">PKR 391,200</span></div>
+<div class="rw sec"><span>Expenses</span><span></span><span></span></div>
+<div class="rw r"><span>Seeds, Nutrients, Water &amp; Electricity</span><span class="n">PKR 8,000</span><span class="n">PKR 96,000</span></div>
+<div class="rw tot"><span>Total Expenses</span><span class="n">PKR 8,000</span><span class="n">PKR 96,000</span></div>
+<div class="rw net"><span>Net Profit</span><span class="n">PKR 24,600</span><span class="n">PKR 295,200</span></div>
+</div>
+</div>
+</section>
+
+<!-- ===== SLIDE 4B: PLAN & FINANCIAL PLAN · THE NUMBERS ===== -->
+<section class="slide" id="s4b" data-n="8">
+<div class="tb"><h1>Financial Plan</h1><h2>&amp; The Numbers</h2></div>
+<div class="head">What one school farm earns each month</div>
+<div class="pl" id="pl"></div>
+<div class="ch" id="chart2"><div class="label" style="margin-bottom:6px">Where the PKR <span id="c2t"></span> goes</div></div>
+<div class="panel annual" id="annual"></div>
+</section>
+
+<!-- ===== SLIDE 5: MARKETING & SALES ===== -->
+<section class="slide" id="s5" data-n="9">
+<div class="tb"><h1>Marketing</h1><h2>&amp; Sales</h2></div>
+<div class="head">Six ways to spread the word</div>
+<div class="mk">
+<div class="card mc"><div class="tr1"><div class="badge">1</div><h3>School Community First</h3></div><p>Use students, parents, teachers, and school events to create initial awareness.</p></div>
+<div class="card mc"><div class="tr1"><div class="badge">2</div><h3>Harvest-Day Content</h3></div><p>Post real photos and short videos showing students growing and harvesting vegetables.</p></div>
+<div class="card mc"><div class="tr1"><div class="badge">3</div><h3>Visible School Farms</h3></div><p>Use the farm itself as a live demonstration for parents, visitors, and potential sponsor schools.</p></div>
+<div class="card mc"><div class="tr1"><div class="badge">4</div><h3>Impact-Based Marketing</h3></div><p>Share measurable results: vegetables grown, water saved, and students trained.</p></div>
+<div class="card mc"><div class="tr1"><div class="badge">5</div><h3>School-to-School Referrals</h3></div><p>Encourage participating schools to recommend the program to other institutions.</p></div>
+<div class="card mc"><div class="tr1"><div class="badge">6</div><h3>Local Community Campaigns</h3></div><p>Promote harvests through school WhatsApp groups and community social media pages.</p></div>
+<div class="panel mc tile"><p>Start inside the school community, prove it with visible results, then grow through sponsors and referrals.</p></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 6: COMPETITION ===== -->
+<section class="slide" id="s6" data-n="10">
+<div class="tb"><h1>Competition</h1></div>
+<div class="head">Who else is in this space?</div>
+<div class="comp">
+<div class="card cc"><h3>Crops in Pots</h3><span class="chip">Education</span><p>School gardens, urban farming, and environmental education.</p></div>
+<div class="card cc"><h3>Sabza Hydroponics</h3><span class="chip">Training</span><p>Hydroponic systems, training, and sustainable urban farming.</p></div>
+<div class="card cc"><h3>Aether</h3><span class="chip">Commercial</span><p>Commercial hydroponic farm installation, management, and produce.</p></div>
+</div>
+<div class="panel adv">
+<div class="label">Our unique selling point — <span class="brand">Urban SproutEd</span></div>
+<div class="st">We turn unused spaces into cost-effective, soil-free STEM labs, educating urban communities on sustainable farming while enriching educational networks and significantly reducing resource consumption.</div>
+<div class="pills"><span class="pill">School-based farming</span><span class="pill">Hands-on student education</span><span class="pill">Ongoing maintenance</span><span class="pill">Vegetable sales</span></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 7: SOCIAL IMPACT ===== -->
+<section class="slide" id="s7" data-n="11">
+<div class="tb"><h1>Social Impact</h1></div>
+<div class="head">Growing Food. Growing Futures.</div>
+<div class="mis">Turning unused school spaces into living classrooms that benefit students, communities, and the environment.</div>
+<div class="imp">
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><path d="M3 5h6a3 3 0 0 1 3 2 3 3 0 0 1 3-2h6v13h-6a3 3 0 0 0-3 2 3 3 0 0 0-3-2H3z"/><path d="M12 7v13"/></svg><h3>Hands-On Education</h3></div><p>Harvest in <b>~55 days</b> vs ~100 in soil, so kids see results within a school term.<span class="cite">Texas A&amp;M AgriLife</span></p></div>
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12C12 8 9 6 4 6c0 4 3 6 8 6z"/><path d="M12 14c0-3 2-5 7-5 0 3-2 5-7 5z"/></svg><h3>Local Food Production</h3></div><p><b>4 in 10</b> under-fives are stunted, so fresh greens matter.<span class="cite">UNICEF</span></p></div>
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3C8 8 5.5 11 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 11 16 8 12 3z"/></svg><h3>Responsible Water Use</h3></div><p><b>85–90% less water</b> for lettuce than soil farming.<span class="cite">Texas A&amp;M AgriLife</span></p></div>
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3.5 3.5 3.5 14.5 0 18-3.5-3.5-3.5-14.5 0-18z"/></svg><h3>Climate Awareness</h3></div><p>Students develop practical knowledge of resource conservation, sustainable farming, and environmental responsibility.</p></div>
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 20v-6M12 20v-10M18 20V5"/></svg><h3>Future-Ready Skills</h3></div><p>Students gain exposure to agriculture, teamwork, and agritech skills that can support future opportunities.</p></div>
+<div class="card ic"><div class="tr1"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v5M12 12.5H5v4M12 12.5h7v4"/></svg><h3>A Model That Can Grow</h3></div><p>A successful pilot can be replicated across other schools and institutions with suitable space.</p></div>
+</div>
+</section>
+
+<!-- ===== SLIDE 7B: LONG-TERM IMPACT & SDGs ===== -->
+<section class="slide" id="s7b" data-n="12">
+<div class="tb"><h1>Long-Term Impact</h1></div>
+<div class="panel lt"><div class="lt-t"><span class="sg">Our long-term impact:</span> Better-informed students, productive school spaces, and a generation more connected to sustainable food systems.</div></div>
+</section>
+
+<!-- ===== SLIDE 8: TEAM ===== -->
+<section class="slide" id="s8" data-n="13">
+<div class="tb"><h1>Our Team</h1></div>
+<div class="head">The People Behind Urban SproutEd</div>
+<div class="team">
+<div class="card tm"><div class="av">Z</div><h3>Zaid</h3><div class="role">Project Lead</div><p>Guides the project vision, coordinates decisions, and keeps the team moving forward.</p></div>
+<div class="card tm"><div class="av">S</div><h3>Saad</h3><div class="role">Research &amp; Strategy</div><p>Researches solutions, develops ideas, and supports project planning.</p></div>
+<div class="card tm"><div class="av">A</div><h3>Arslan</h3><div class="role">Digital Strategy, Technology &amp; AI</div><p>Leads the project’s digital and technical work, AI integration, branding, presentations, and marketing.</p></div>
+<div class="card tm"><div class="av">H</div><h3>Huzaifa</h3><div class="role">AI &amp; Technical Support</div><p>Contributes AI expertise and helps explore practical solutions.</p></div>
+<div class="card tm"><div class="av">R</div><h3>Rohan</h3><div class="role">Project Support &amp; Collaboration</div><p>Supports team activities and helps bring ideas to life.</p></div>
+</div>
+<div class="panel close"><svg viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12C12 8 9 6 4 6c0 4 3 6 8 6z"/><path d="M12 14c0-3 2-5 7-5 0 3-2 5-7 5z"/></svg>One team. One vision. A greener future.</div>
+</section>
+</div>
+<nav aria-label="Slide navigation"><button class="nb" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="dots" id="dots"></div><button class="nb" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></nav>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0,N=slides.length;
+var dots=$('dots');
+slides.forEach(function(s,i){var d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Go to slide '+(i+1));d.onclick=function(){go(i)};dots.appendChild(d)});
+function go(n){
+ cur=Math.max(0,Math.min(N-1,n));
+ slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+ [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur)});
+ $('prev').disabled=cur===0;$('next').disabled=cur===N-1;
+ $('logo').classList.toggle('hide',!!slides[cur].dataset.nologo);
+ if(window.__ready)enter(slides[cur]);
+}
+$('prev').onclick=function(){go(cur-1)};$('next').onclick=function(){go(cur+1)};
+document.addEventListener('keydown',function(e){
+ var k=e.key;
+ if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();go(cur+1)}
+ else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();go(cur-1)}
+ else if(k==='Home')go(0);else if(k==='End')go(N-1);
+ else if(/^[1-9]$/.test(k))go(+k-1);else if(k==='0')go(9);
+});
+var sx=null;
+document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));sx=null},{passive:true});
+function fit(){document.documentElement.style.setProperty('--k',Math.max(.1,Math.min(innerWidth/1920,(innerHeight-72)/1080)))}
+addEventListener('resize',fit);fit();
+function theme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('ue-theme',t)}catch(e){}}
+try{var st=localStorage.getItem('ue-theme');if(st==='dark'||st==='light')theme(st)}catch(e){}
+$('theme').onclick=function(){theme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')};
+var FIN={
+ revenue:[
+  {stream:'Vegetable sales',item:'Parents (school gate)',monthly:7500,note:'25 kg @ PKR 300/kg'},
+  {stream:'Vegetable sales',item:'School cafeteria',monthly:4000,note:'20 kg @ PKR 200/kg'},
+  {stream:'Vegetable sales',item:'Local shops / cafes',monthly:3500,note:'15 kg @ PKR 233/kg'},
+  {stream:'Subscription',item:'School / PTA renewal',monthly:12500,note:'PKR 150,000 per year, paid annually, amortised monthly'}
+ ],
+ costs:[
+  {item:'Seeds & seedlings',monthly:2000,note:'Replanting every 3-4 weeks'},
+  {item:'Hydroponic nutrients',monthly:3000,note:'A/B nutrients, pH adjusters'},
+  {item:'Water & electricity',monthly:2000,note:'Pump running 12 hrs/day'},
+  {item:'Repairs & spare parts',monthly:1000,note:'Tubing, net pots, bulbs'}
+ ]};
+// Expected: revenue 27,500/mo (330,000/yr) · costs 8,000/mo (96,000/yr) · net 19,500/mo (234,000/yr); vegetable sales 15,000/mo
+var sum=function(a){return a.reduce(function(t,x){return t+x.monthly},0)};
+var T={rev:sum(FIN.revenue),cost:sum(FIN.costs)};T.net=T.rev-T.cost;
+T.veg=sum(FIN.revenue.filter(function(r){return r.stream==='Vegetable sales'}));
+T.sub=T.rev-T.veg;
+console.assert(T.rev===27500,'revenue');console.assert(T.cost===8000,'costs');console.assert(T.net===19500,'net');
+console.assert(T.rev*12===330000&&T.cost*12===96000&&T.net*12===234000,'annual');console.assert(T.veg===15000&&T.sub===12500,'streams');
+var fmt=function(n){return n.toLocaleString('en-US')};
+var $$=function(id){return document.getElementById(id)};
+// 4A texts + donut
+$$('f-veg').textContent='PKR '+fmt(T.veg);$$('f-sub').textContent='PKR '+fmt(T.sub);$$('c1t').textContent=fmt(T.rev);
+(function(){
+ var segs=[{n:['School subscription'],v:12500,c:'var(--c1)'},{n:['Parents (school gate)'],v:7500,c:'var(--c2)'},{n:['School cafeteria'],v:4000,c:'var(--c3)'},{n:['Local shops / cafes'],v:3500,c:'var(--c4)'}];
+ // values taken from FIN
+ segs[0].v=FIN.revenue[3].v||FIN.revenue[3].monthly;segs[1].v=FIN.revenue[0].monthly;segs[2].v=FIN.revenue[1].monthly;segs[3].v=FIN.revenue[2].monthly;
+ var cx=392,cy=250,r=165,sw=56,C=2*Math.PI*r,acc=0,svg='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--ink12)" stroke-width="'+sw+'"/>',html='';
+ segs.forEach(function(s){
+  var f=s.v/T.rev,len=f*C;
+  svg+='<circle class="seg" style="--len:'+(len-3).toFixed(1)+'px;--C:'+C.toFixed(1)+'px;--d:'+(acc*0.8).toFixed(2)+'s" cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+s.c+'" stroke-width="'+sw+'" transform="rotate('+(-90+acc*360)+' '+cx+' '+cy+')"/>';
+  var mid=(acc+f/2)*2*Math.PI,x=cx+(r+sw/2+16)*Math.sin(mid),y=cy-(r+sw/2+16)*Math.cos(mid),right=Math.sin(mid)>0;
+  var pct=Math.round(f*100);
+  html+='<div class="dl '+(right?'r':'l')+'" style="top:'+(y+50-22)+'px;'+(right?'left:'+x+'px':'left:'+(x-200)+'px')+'"><b>'+s.n[0]+'</b>PKR '+fmt(s.v)+' · '+pct+'%</div>';
+  acc+=f;
+ });
+ var ch=$$('chart1');
+ ch.insertAdjacentHTML('beforeend','<svg viewBox="0 0 784 634" aria-hidden="true">'+svg+'</svg>'+html+'<div class="donut-c" style="top:'+(cy+50-52)+'px"><div class="v">'+fmt(T.rev)+'</div><div class="u">PKR / month</div></div>');
+})();
+// 4B table
+(function(){
+ var h='<div class="tr th"><span>Category</span><span>Details</span><span class="n">PKR per month</span></div>';
+ h+='<div class="tr sec"><span>Revenue</span></div>';
+ h+='<div class="tr"><span>Vegetable sales</span><span>60 kg harvest @ about PKR 250/kg</span><span class="n">'+fmt(T.veg)+'</span></div>';
+ h+='<div class="tr"><span>School subscription</span><span>PKR 150,000 ÷ 12 months</span><span class="n">'+fmt(T.sub)+'</span></div>';
+ h+='<div class="tr tot"><span>Total monthly revenue</span><span class="n">'+fmt(T.rev)+'</span></div>';
+ h+='<div class="tr sec"><span>Expenses</span></div>';
+ h+='<div class="tr"><span>Maintenance costs</span><span>Seeds, nutrients, water &amp; electricity, repairs</span><span class="n">'+fmt(T.cost)+'</span></div>';
+ h+='<div class="tr tot"><span>Total monthly expenses</span><span class="n">'+fmt(T.cost)+'</span></div>';
+ h+='<div class="tr net"><span><b>Net monthly profit</b></span><span>Revenue minus expenses</span><span class="n">'+fmt(T.net)+'</span></div>';
+ $$('pl').innerHTML=h;
+ // chart 2
+ var cs=FIN.costs.slice().sort(function(a,b){return b.monthly-a.monthly}),max=cs[0].monthly,o='';
+ cs.forEach(function(c){var p=c.monthly/T.cost*100;
+  o+='<div class="cb"><div><div class="nm">'+c.item.replace('&','&amp;')+'</div><div class="nt">'+c.note+'</div></div><div class="tk"><span class="bar2" style="width:'+Math.round(c.monthly/max*240)+'px"></span><span class="val">'+fmt(c.monthly)+' · '+(Math.round(p*10)/10)+'%</span></div></div>';});
+ $$('c2t').textContent=fmt(T.cost);$$('chart2').insertAdjacentHTML('beforeend',o);
+ // annual strip
+ var a=function(l,v,g){return '<div><div class="label">'+l+'</div><div class="v'+(g?' g':'')+'">'+fmt(v*12)+'</div><div class="u">PKR per year</div></div>'};
+ $$('annual').innerHTML=a('Revenue',T.rev)+a('Expenses',T.cost)+a('Net',T.net,1);
+})();
+
+// animated background
+(function(){var bg=document.createElement('div');bg.id='bg';bg.setAttribute('aria-hidden','true');
+ bg.innerHTML='<div class="blob b1"></div><div class="blob b2"></div>';
+ for(var k=0;k<14;k++){var d=document.createElement('span');d.className='drop';d.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(10+Math.random()*12)+'s;animation-delay:-'+(Math.random()*14)+'s;transform:rotate(-45deg) scale('+(0.7+Math.random()*0.9)+')';bg.appendChild(d)}
+ document.body.insertBefore(bg,document.body.firstChild)})();
+// reveal order + count-up setup
+var REV='.tb,.head,.sub,.mis,.vp,.logo-lg,.txt>*,.stat,.step,.sdg,.pn,.foot,.pb,.pocket,.chart>.label,.dl,.donut-c,.mc,.cc,.adv,.ic,.tm,.close,.pl .tr,.ch>.label,.cb,.annual,.lt,.sc,.pc,.src,.rdspec,.rdvis,.rdcard,.ct';
+slides.forEach(function(s){[].forEach.call(s.querySelectorAll(REV),function(e,i){e.classList.add('rv');e.style.setProperty('--i',Math.min(i,16))})});
+var CNT='#s1 .num,.pocket .fig b,.donut-c .v,.pl .tr:not(.th) .n,.annual .v';
+[].forEach.call(document.querySelectorAll(CNT),function(e){
+ var r=/^(\D*?)(\d[\d,]*\.?\d*)(.*)$/.exec(e.textContent);if(!r||r[3].indexOf('–')>-1)return;
+ e.dataset.pre=r[1];e.dataset.num=r[2].replace(/,/g,'');e.dataset.suf=r[3];e.dataset.dec=(r[2].split('.')[1]||'').length;e.dataset.cnt=1});
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function enter(s){
+ if(RM)return;
+ [].forEach.call(s.querySelectorAll('[data-cnt]'),function(e){
+  var to=parseFloat(e.dataset.num),dec=+e.dataset.dec,t0=null,delay=450,dur=1300;
+  if(e._raf)cancelAnimationFrame(e._raf);
+  var out=function(v){e.textContent=e.dataset.pre+v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+e.dataset.suf};
+  out(0);
+  var step=function(t){if(t0===null)t0=t;var el=t-t0-delay;if(el<0){e._raf=requestAnimationFrame(step);return}
+   var p=Math.min(1,el/dur),k=1-Math.pow(1-p,3);out(to*k);if(p<1)e._raf=requestAnimationFrame(step);else out(to)};
+  e._raf=requestAnimationFrame(step)});
+}
+
+
+window.__ready=1;go(0);
+})();
+</script></body></html>
